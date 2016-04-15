@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from collections import deque
 from enum import IntEnum
 from functools import total_ordering
@@ -43,13 +45,12 @@ def play_round():
     winning_move = max(moves)
     loosing_move = min(moves)
     if winning_move == loosing_move:
-        print('draw')
         return Result.draw
     winner_index = moves.index(winning_move)
     return list(Result.__members__.values())[winner_index]
 
 def main():
-    play_round()
+    print(play_round().name.replace('_', ' '), '!')
 
 if __name__ == '__main__':
     main()
