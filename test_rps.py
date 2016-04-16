@@ -22,9 +22,9 @@ def test_draws(moves, fake_input):
 @pytest.mark.parametrize('moves', ('rs', 'pr', 'sp'))
 def test_p1_wins(moves, fake_input):
     fake_input(*moves)
-    assert play_round() == Result.player_1_win
+    assert play_round() == Result.player_1_wins
 
 @pytest.mark.parametrize('moves', ('sr', 'rp', 'ps'))
 def test_p2_wins(moves, fake_input):
     fake_input(*moves)
-    assert play_round() == Result.player_2_win
+    assert play_round() == Result.player_2_wins

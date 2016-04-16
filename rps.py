@@ -7,9 +7,12 @@ from functools import total_ordering
 input_function = input
 
 class Result(IntEnum):
-    player_1_win = 1
-    player_2_win = 2
+    player_1_wins = 1
+    player_2_wins = 2
     draw = 3
+
+    def __str__(self):
+        return self.name.replace('_', ' ').title()
 
 @total_ordering
 class RPS(object):
@@ -35,8 +38,9 @@ class RPS(object):
             loses_to.rotate(1)
         return other.move == loses_to[1]
 
-    def __unicode__(self):
+    def __repr__(self):
         return self.keys[self.move]
+
 
 def get_local_move():
     while True:
@@ -53,11 +57,19 @@ def play_round():
     return decide_winner(moves)
 
 def decide_winner(moves):
+    assert len(moves) == 2, moves
     winning_move = max(moves)
     loosing_move = min(moves)
     if winning_move == loosing_move:
+        print(winning_move, 'draws', loosing_move)
         return Result.draw
+    methods = {
+        'r': 'Blunts',
+        'p': 'Covers',
+        's': 'Cut',
+    }
     winner_index = moves.index(winning_move)
+    print(winning_move, methods[winning_move.move], loosing_move)
     return list(Result.__members__.values())[winner_index]
 
 def main():
