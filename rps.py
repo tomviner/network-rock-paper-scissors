@@ -13,8 +13,14 @@ class Result(IntEnum):
 
 @total_ordering
 class RPS(object):
+    keys = {
+        'r': 'Rock',
+        'p': 'Paper',
+        's': 'Scissors',
+    }
+
     def __init__(self, move):
-        assert move in 'rps'
+        assert move in self.keys, move
         self.move = move
 
     def __hash__(self):
@@ -29,7 +35,10 @@ class RPS(object):
             loses_to.rotate(1)
         return other.move == loses_to[1]
 
-def get_move():
+    def __unicode__(self):
+        return self.keys[self.move]
+
+def get_local_move():
     while True:
         print('Enter [r]ock, [p]aper or [s]cissors')
         move = input_function('> ').lower()
@@ -40,8 +49,10 @@ def play_round():
     moves = []
     for player in range(1, 3):
         print('player {}, enter your move:'.format(player))
-        moves.append(get_move())
+        moves.append(get_local_move())
+    return decide_winner(moves)
 
+def decide_winner(moves):
     winning_move = max(moves)
     loosing_move = min(moves)
     if winning_move == loosing_move:
