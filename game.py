@@ -12,15 +12,8 @@ decide winner
 import sys
 
 import networkzero as nw0
-from rps import RPS, decide_winner, get_local_move
+from rps import RPS, decide_winner
 
-
-def play_round():
-    moves = []
-    for player in range(1, 3):
-        print('player {}, enter your move:'.format(player))
-        moves.append(get_local_move())
-    return decide_winner(moves)
 
 def play(n, my_move_char):
     n = int(n)
