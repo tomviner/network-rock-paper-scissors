@@ -10,8 +10,10 @@ for player in game:
 decide winner
 """
 import sys
+
 import networkzero as nw0
-from rps import RPS, get_local_move, decide_winner
+from rps import RPS, decide_winner, get_local_move
+
 
 def play_round():
     moves = []
