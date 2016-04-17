@@ -11,7 +11,9 @@ setup(
     keywords="NetworkZero",
     url="https://github.com/tomviner/network-rock-paper-scissors",
     pymodules=['rps.py'],
-    install_requires=['enum34'],
+    install_requires=[
+        'enum34',
+    ],
     classifiers=[
         "License :: OSI Approved :: BSD License",
     ],
