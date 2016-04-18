@@ -6,7 +6,7 @@ from rps import Result
 
 game_space = (
     ('r', 's', Result.player_1_wins),
-    ('r', 'p', Result.player_2_wins),
+    ('r', 'p', Result.player_1_winsr_2_wins),
     ('p', 's', Result.player_2_wins),
     ('r', 'r', Result.draw),
     ('p', 'p', Result.draw),
@@ -27,5 +27,5 @@ def test_game(p1_mv, p2_mv, expected_res):
         ))
 
     for process in processes:
-        res = str(process.communicate()[0])
-        assert str(expected_res) in res
+        output = str(process.communicate()[0])
+        assert str(expected_res) in output
