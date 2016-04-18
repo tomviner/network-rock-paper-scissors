@@ -1,3 +1,4 @@
+import time
 import sys
 from subprocess import PIPE, Popen
 
@@ -25,6 +26,14 @@ def test_game(p1_mv, p2_mv, expected_res):
             ],
             stdout=PIPE
         ))
+
+    while (
+        processes[0].returncode is not None and
+        processes[1].returncode is not None
+    ):
+        time.sleep(0.1)
+        processes[0].poll()
+        processes[1].poll()
 
     for process in processes:
         output = str(process.communicate()[0])

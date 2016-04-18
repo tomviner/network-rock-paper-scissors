@@ -26,7 +26,7 @@ def test_game(p1_mv, p2_mv, expected_res):
     t2 = threading.Thread(target=wrapped_play, args=(2, p2_mv))
     t1.start()
     t2.start()
-    for i in range(10):
+    for i in range(20):
         time.sleep(0.5)
         t1.join(timeout=2)
         t2.join(timeout=2)
