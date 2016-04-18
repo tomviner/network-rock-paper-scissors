@@ -1,7 +1,6 @@
 import pytest
-
 import rps
-from rps import Result, play_round
+from rps import play_round, Result
 
 
 @pytest.fixture

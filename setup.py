@@ -10,7 +10,10 @@ setup(
     license="BSD",
     keywords="NetworkZero",
     url="https://github.com/tomviner/network-rock-paper-scissors",
-    pymodules=['rps.py'],
+    pymodules=[
+        'rps.py'
+        'game.py'
+    ],
     install_requires=[
         'enum34',
     ],
