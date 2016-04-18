@@ -13,6 +13,7 @@ game_space = (
     ('p', 'p', Result.draw),
     ('s', 's', Result.draw),
 )
+@pytest.mark.xfail
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
 def test_game(p1_mv, p2_mv, expected_res):
     results = []
