@@ -1,4 +1,5 @@
-from multiprocessing import Pool
+import time
+import threading
 
 import pytest
 
@@ -15,14 +16,21 @@ game_space = (
 )
 @pytest.mark.parametrize('p1_mv, p2_mv, res', game_space)
 def test_game(p1_mv, p2_mv, res):
-    pool = Pool(2, maxtasksperchild=1)
-    res1 = pool.apply_async(play, args=(1, p1_mv))
-    res2 = pool.apply_async(play, args=(2, p2_mv))
-    res1.wait(timeout=5)
-    res2.wait(timeout=5)
-    pool.close()
-    pool.join()
-    assert res1.successful()
-    assert res2.successful()
-    assert res1.get() == res
-    assert res2.get() == res
+    results = []
+
+    def wrapped_play(n, my_move_char):
+        result = play(n, my_move_char)
+        results.append(result)
+
+    t1 = threading.Thread(target=wrapped_play, args=(1, p1_mv))
+    t2 = threading.Thread(target=wrapped_play, args=(2, p2_mv))
+    t1.start()
+    t2.start()
+    for i in range(3):
+        time.sleep(0.1)
+        t1.join(timeout=0.5)
+        t2.join(timeout=0.5)
+    assert not t1.is_alive()
+    assert not t2.is_alive()
+    assert results[0] == res
+    assert results[1] == res
