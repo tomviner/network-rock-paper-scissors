@@ -6,7 +6,7 @@ from rps import Result
 
 game_space = (
     ('r', 's', Result.player_1_wins),
-    ('r', 'p', Result.player_1_winsr_2_wins),
+    ('r', 'p', Result.player_2_wins),
     ('p', 's', Result.player_2_wins),
     ('r', 'r', Result.draw),
     ('p', 'p', Result.draw),
