@@ -26,10 +26,10 @@ def test_game(p1_mv, p2_mv, res):
     t2 = threading.Thread(target=wrapped_play, args=(2, p2_mv))
     t1.start()
     t2.start()
-    for i in range(3):
-        time.sleep(0.1)
-        t1.join(timeout=0.5)
-        t2.join(timeout=0.5)
+    for i in range(10):
+        time.sleep(0.5)
+        t1.join(timeout=2)
+        t2.join(timeout=2)
     assert not t1.is_alive()
     assert not t2.is_alive()
     assert results[0] == res
