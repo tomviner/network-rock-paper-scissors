@@ -10,10 +10,7 @@ setup(
     license="BSD",
     keywords="NetworkZero",
     url="https://github.com/tomviner/network-rock-paper-scissors",
-    pymodules=[
-        'rps.py'
-        'game.py'
-    ],
+    packages=('netrps',),
     install_requires=[
         'enum34',
     ],

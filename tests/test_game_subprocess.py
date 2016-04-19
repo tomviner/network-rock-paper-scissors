@@ -1,9 +1,9 @@
-import time
 import sys
+import time
 from subprocess import PIPE, Popen
 
 import pytest
-from rps import Result
+from netrps.rps import Result
 
 game_space = (
     ('r', 's', Result.player_1_wins),
@@ -20,7 +20,7 @@ def test_game(p1_mv, p2_mv, expected_res):
         processes.append(Popen(
             [
                 sys.executable,
-                'game.py',
+                'netrps/game.py',
                 str(i),
                 mv,
             ],

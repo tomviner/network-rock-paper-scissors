@@ -2,8 +2,8 @@ import threading
 import time
 
 import pytest
-from game import play
-from rps import Result
+from netrps.game import play
+from netrps.rps import Result
 
 game_space = (
     ('r', 's', Result.player_1_wins),

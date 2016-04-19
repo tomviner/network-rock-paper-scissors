@@ -1,6 +1,6 @@
 import pytest
-import rps
-from rps import play_round, Result
+from netrps import rps
+from netrps.rps import play_round, Result
 
 
 @pytest.fixture
