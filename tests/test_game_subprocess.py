@@ -14,7 +14,7 @@ game_space = (
     ('s', 's', Result.draw),
 )
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
-def test_game(p1_mv, p2_mv, expected_res):
+def test_game(p1_mv, p2_mv, expected_res, beacon):
     processes = []
     for i, mv in enumerate((p1_mv, p2_mv), start=1):
         processes.append(Popen(

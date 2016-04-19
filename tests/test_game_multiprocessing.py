@@ -17,7 +17,7 @@ game_space = (
 @pytest.mark.skipif(sys.version_info < (3, 0), reason="2.7")
 @pytest.mark.xfail
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
-def test_game(p1_mv, p2_mv, expected_res):
+def test_game(p1_mv, p2_mv, expected_res, beacon):
     pool = Pool(2, maxtasksperchild=1)
     res1 = pool.apply_async(play, args=(1, p1_mv))
     res2 = pool.apply_async(play, args=(2, p2_mv))

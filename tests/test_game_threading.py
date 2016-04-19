@@ -17,7 +17,7 @@ game_space = (
 @pytest.mark.skipif(sys.version_info < (3, 0), reason="2.7")
 @pytest.mark.xfail
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
-def test_game(p1_mv, p2_mv, expected_res):
+def test_game(p1_mv, p2_mv, expected_res, beacon):
     results = []
 
     def wrapped_play(n, my_move_char):
