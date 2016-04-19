@@ -10,7 +10,9 @@ setup(
     license="BSD",
     keywords="NetworkZero",
     url="https://github.com/tomviner/network-rock-paper-scissors",
-    packages=('netrps',),
+    packages=[
+        'netrps'
+    ],
     install_requires=[
         'enum34',
     ],
