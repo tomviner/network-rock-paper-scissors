@@ -23,9 +23,9 @@ def play(n, my_move_char):
         # advertise
         my_address = nw0.advertise("RPS")
         # receive their move
-        their_move = nw0.wait_for_message(my_address)
+        their_move = nw0.wait_for_message_from(my_address)
         # reply with my move
-        nw0.send_reply(my_address, my_move_char)
+        nw0.send_reply_to(my_address, my_move_char)
 
         moves.append(RPS(my_move_char))
         moves.append(RPS(their_move))
@@ -33,7 +33,7 @@ def play(n, my_move_char):
         # discover
         my_address = nw0.discover('RPS')
         # send my move, and get their move back
-        their_move = nw0.send_message(my_address, my_move_char)
+        their_move = nw0.send_message_to(my_address, my_move_char)
 
         moves.append(RPS(their_move))
         moves.append(RPS(my_move_char))
