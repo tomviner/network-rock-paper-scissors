@@ -1,7 +1,9 @@
+import sys
 import time
 from multiprocessing import Pool
 
 import pytest
+
 from netrps.game import play
 from netrps.rps import Result
 
@@ -13,6 +15,7 @@ game_space = (
     ('p', 'p', Result.draw),
     ('s', 's', Result.draw),
 )
+@pytest.mark.skipif(sys.version_info < (3, 0), reason="Timesout on 2.7")
 @pytest.mark.xfail
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
 def test_game(p1_mv, p2_mv, expected_res, beacon):

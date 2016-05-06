@@ -2,6 +2,7 @@ import threading
 import time
 
 import pytest
+
 from netrps.game import play
 from netrps.rps import Result
 

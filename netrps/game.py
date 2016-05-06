@@ -12,7 +12,7 @@ decide winner
 import sys
 
 import networkzero as nw0
-from netrps.rps import decide_winner, RPS
+from netrps.rps import RPS, decide_winner
 
 
 def play(n, my_move_char):

@@ -3,6 +3,7 @@ import time
 from subprocess import PIPE, Popen
 
 import pytest
+
 from netrps.rps import Result
 
 game_space = (

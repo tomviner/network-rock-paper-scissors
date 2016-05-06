@@ -1,9 +1,8 @@
 from __future__ import print_function
 
 from collections import deque
-from functools import total_ordering
-
 from enum import IntEnum
+from functools import total_ordering
 
 input_function = input
 
