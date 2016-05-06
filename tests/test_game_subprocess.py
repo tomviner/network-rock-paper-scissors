@@ -16,20 +16,20 @@ game_space = (
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
 def test_game(p1_mv, p2_mv, expected_res, beacon):
     processes = []
-    for i, mv in enumerate((p1_mv, p2_mv), start=1):
+    for p_num, mv in enumerate((p1_mv, p2_mv), start=1):
         processes.append(Popen(
             [
                 sys.executable,
                 'netrps/game.py',
-                str(i),
+                str(p_num),
                 mv,
             ],
             stdout=PIPE
         ))
 
     while (
-        processes[0].returncode is not None and
-        processes[1].returncode is not None
+        processes[0].returncode is None and
+        processes[1].returncode is None
     ):
         time.sleep(0.1)
         processes[0].poll()

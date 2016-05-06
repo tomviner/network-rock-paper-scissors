@@ -25,22 +25,23 @@ class RPS(object):
 
     def __init__(self, move):
         assert move in self.keys, move
-        self.move = move
+        self.char = move
 
     def __hash__(self):
-        return hash(self.move)
+        return hash(self.char)
 
     def __eq__(self, other):
-        return self.move == other.move
+        return self.char == other.char
 
     def __lt__(self, other):
+        # r < p < s < r ...
         loses_to = deque('rps')
-        while loses_to[0] != self.move:
+        while loses_to[0] != self.char:
             loses_to.rotate(1)
-        return other.move == loses_to[1]
+        return other.char == loses_to[1]
 
     def __repr__(self):
-        return self.keys[self.move]
+        return self.keys[self.char]
 
 
 def get_local_move():
@@ -70,7 +71,7 @@ def decide_winner(moves):
         's': 'Cut',
     }
     winner_index = moves.index(winning_move)
-    print(winning_move, methods[winning_move.move], loosing_move)
+    print(winning_move, methods[winning_move.char], loosing_move)
     return list(Result.__members__.values())[winner_index]
 
 def main():

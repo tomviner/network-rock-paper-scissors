@@ -1,12 +1,10 @@
 import threading
-import sys
 import time
 
 import pytest
 from netrps.game import play
 from netrps.rps import Result
 
-# @pytest.mark.skipif(sys.version_info < (3, 0), reason="2.7")
 game_space = (
     ('r', 's', Result.player_1_wins),
     ('r', 'p', Result.player_2_wins),
@@ -28,7 +26,7 @@ def test_game(p1_mv, p2_mv, expected_res, beacon):
     t2 = threading.Thread(target=wrapped_play, args=(2, p2_mv))
     t1.start()
     t2.start()
-    for i in range(20):
+    for _ in range(20):
         time.sleep(0.5)
         t1.join(timeout=2)
         t2.join(timeout=2)

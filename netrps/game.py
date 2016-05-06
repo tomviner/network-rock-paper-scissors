@@ -17,29 +17,34 @@ from netrps.rps import decide_winner, RPS
 
 def play(n, my_move_char):
     n = int(n)
+    my_move = RPS(my_move_char)
 
     moves = []
     if n == 1:
         # advertise
         my_address = nw0.advertise("RPS")
         # receive their move
-        their_move = nw0.wait_for_message_from(my_address)
+        their_move = RPS(
+            nw0.wait_for_message_from(my_address)
+        )
         # reply with my move
         nw0.send_reply_to(my_address, my_move_char)
 
-        moves.append(RPS(my_move_char))
-        moves.append(RPS(their_move))
+        moves.append(my_move)
+        moves.append(their_move)
     else:
         # discover
         my_address = nw0.discover('RPS')
         # send my move, and get their move back
-        their_move = nw0.send_message_to(my_address, my_move_char)
+        their_move = RPS(
+            nw0.send_message_to(my_address, my_move_char)
+        )
 
-        moves.append(RPS(their_move))
-        moves.append(RPS(my_move_char))
+        moves.append(their_move)
+        moves.append(my_move)
 
-    print('I play', RPS(my_move_char))
-    print('They play', RPS(their_move))
+    print('I play', my_move)
+    print('They play', their_move)
     return decide_winner(moves)
 
 if __name__ == '__main__':
