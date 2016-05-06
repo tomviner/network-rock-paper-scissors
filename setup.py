@@ -6,7 +6,7 @@ setup(
     author="Tom Viner",
     author_email="netrps@viner.tv",
     description=(
-        "A game of Rock, Paper, Scissors over NetworkZero - trust no one."),
+        "A game of Rock, Paper, Scissors over NetworkZero - Trust No One."),
     license="BSD",
     keywords="NetworkZero",
     url="https://github.com/tomviner/network-rock-paper-scissors",
