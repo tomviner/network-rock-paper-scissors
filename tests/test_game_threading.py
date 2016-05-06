@@ -6,6 +6,7 @@ import pytest
 from netrps.game import play
 from netrps.rps import Result
 
+# @pytest.mark.skipif(sys.version_info < (3, 0), reason="2.7")
 game_space = (
     ('r', 's', Result.player_1_wins),
     ('r', 'p', Result.player_2_wins),
@@ -14,7 +15,6 @@ game_space = (
     ('p', 'p', Result.draw),
     ('s', 's', Result.draw),
 )
-@pytest.mark.skipif(sys.version_info < (3, 0), reason="2.7")
 @pytest.mark.xfail
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
 def test_game(p1_mv, p2_mv, expected_res, beacon):
