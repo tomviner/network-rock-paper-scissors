@@ -1,5 +1,6 @@
 import threading
 import time
+import sys
 
 import pytest
 
@@ -14,7 +15,7 @@ game_space = (
     ('p', 'p', Result.draw),
     ('s', 's', Result.draw),
 )
-@pytest.mark.xfail
+@pytest.mark.xfail(sys.version_info < (3, 0), reason="Fails on 2.7")
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
 def test_game(p1_mv, p2_mv, expected_res, beacon):
     results = []
