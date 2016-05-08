@@ -16,7 +16,6 @@ game_space = (
     ('s', 's', Result.draw),
 )
 @pytest.mark.skipif(sys.version_info < (3, 0), reason="Timeout on 2.7")
-@pytest.mark.xfail
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
 def test_game(p1_mv, p2_mv, expected_res, beacon):
     # pretty sure this is not what multiprocessing is for, e.g if there's
