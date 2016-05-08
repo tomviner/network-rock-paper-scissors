@@ -18,5 +18,6 @@ def test_game(turn, beacon):
         proc2.poll()
 
     for proc in (proc1, proc2):
+        assert proc.returncode == 0
         output = str(proc.communicate()[0])
         assert str(turn.expected_res) in output
