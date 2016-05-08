@@ -1,11 +1,14 @@
 import sys
-import time
 from multiprocessing import Pool
 
 import pytest
 
 from netrps.game import play
 from netrps.rps import Result
+
+@pytest.fixture(scope='session')
+def pool(processes=2):
+    return Pool(processes=processes)
 
 game_space = (
     ('r', 's', Result.player_1_wins),
@@ -15,20 +18,11 @@ game_space = (
     ('p', 'p', Result.draw),
     ('s', 's', Result.draw),
 )
-@pytest.mark.skipif(sys.version_info < (3, 0), reason="Timeout on 2.7")
 @pytest.mark.parametrize('p1_mv, p2_mv, expected_res', game_space)
-def test_game(p1_mv, p2_mv, expected_res, beacon):
-    # pretty sure this is not what multiprocessing is for, e.g if there's
-    # just one core, the two players will not be run concurrently.
-    pool = Pool(2, maxtasksperchild=1)
+def test_game(pool, p1_mv, p2_mv, expected_res, beacon):
     res1 = pool.apply_async(play, args=(1, p1_mv))
     res2 = pool.apply_async(play, args=(2, p2_mv))
-    time.sleep(3)
-    res1.wait(timeout=5)
-    res2.wait(timeout=5)
-    pool.close()
-    pool.join()
-    assert res1.successful()
-    assert res2.successful()
     assert res1.get() == expected_res
     assert res2.get() == expected_res
+    assert res1.successful()
+    assert res2.successful()

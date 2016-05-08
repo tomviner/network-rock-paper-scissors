@@ -15,6 +15,7 @@ setup(
     ],
     install_requires=[
         'enum34',
+        'networkzero',
     ],
     classifiers=[
         "License :: OSI Approved :: BSD License",

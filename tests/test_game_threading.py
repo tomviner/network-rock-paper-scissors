@@ -1,6 +1,6 @@
+import sys
 import threading
 import time
-import sys
 
 import pytest
 
@@ -27,11 +27,7 @@ def test_game(p1_mv, p2_mv, expected_res, beacon):
     t2 = threading.Thread(target=wrapped_play, args=(2, p2_mv))
     t1.start()
     t2.start()
-    for _ in range(20):
-        time.sleep(0.5)
-        t1.join(timeout=2)
-        t2.join(timeout=2)
-    assert not t1.is_alive()
-    assert not t2.is_alive()
+    t1.join()
+    t2.join()
     assert results[0] == expected_res
     assert results[1] == expected_res
