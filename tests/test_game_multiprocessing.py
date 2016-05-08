@@ -1,10 +1,10 @@
-import sys
 from multiprocessing import Pool
 
 import pytest
 
 from netrps.game import play
 from netrps.rps import Result
+
 
 @pytest.fixture(scope='session')
 def pool(processes=2):
