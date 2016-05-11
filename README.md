@@ -1,6 +1,7 @@
 # network-rock-paper-scissors
 
-[![Build Status](https://travis-ci.org/tomviner/network-rock-paper-scissors.svg?branch=master)](https://travis-ci.org/tomviner/network-rock-paper-scissors)
+[![Build Status](https://travis-ci.org/tomviner/network-rock-paper-scissors.svg?branch=master)](https://travis-ci.org/tomviner/network-rock-paper-scissors) [![Build status](https://ci.appveyor.com/api/projects/status/y6whao52hfxwpuku?svg=true)](https://ci.appveyor.com/project/tomviner/network-rock-paper-scissors)
+
 
 A game of Rock, Paper, Scissors over [NetworkZero](https://github.com/tjguk/networkzero) - trust no one.
 
