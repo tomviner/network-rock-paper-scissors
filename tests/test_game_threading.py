@@ -1,13 +1,18 @@
+from __future__ import unicode_literals, print_function
+
 import threading
 
-from netrps.game import play
+from netrps.game import play_second, play_first
 
 
-def test_game(turn, beacon):
+def test_game(turn, reset_beacon):
     results = []
 
     def wrapped_play(n, my_move_char):
-        result = play(n, my_move_char)
+        if n == 1:
+            result = play_second(my_move_char)
+        else:
+            result = play_first(my_move_char)
         results.append(result)
 
     t1 = threading.Thread(target=wrapped_play, args=(1, turn.p1_mv))

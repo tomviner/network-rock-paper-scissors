@@ -1,4 +1,4 @@
-from __future__ import print_function
+from __future__ import unicode_literals, print_function
 
 from collections import deque
 from enum import IntEnum
@@ -23,7 +23,9 @@ class RPS(object):
     }
 
     def __init__(self, move):
-        assert move in self.keys, move
+        if move not in self.keys:
+            raise ValueError(
+                "'{}'' not one of 'r', 'p' or 's'".format(move))
         self.char = move
 
     def __hash__(self):

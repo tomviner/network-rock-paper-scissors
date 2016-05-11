@@ -1,14 +1,11 @@
-import sys
+from __future__ import unicode_literals, print_function
+
 from subprocess import PIPE, Popen
 
 
-def test_game(turn, beacon):
-    proc1 = Popen(
-        [sys.executable, 'netrps/game.py', '1', turn.p1_mv],
-        stdout=PIPE)
-    proc2 = Popen(
-        [sys.executable, 'netrps/game.py', '2', turn.p2_mv],
-        stdout=PIPE)
+def test_game(turn, reset_beacon):
+    proc1 = Popen(['netrps', '1', turn.p1_mv], stdout=PIPE)
+    proc2 = Popen(['netrps', '2', turn.p2_mv], stdout=PIPE)
 
     for proc in (proc1, proc2):
         output = str(proc.communicate()[0])

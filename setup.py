@@ -20,4 +20,10 @@ setup(
     classifiers=[
         "License :: OSI Approved :: BSD License",
     ],
+    entry_points={
+        'console_scripts': [
+            'netrps = netrps.game:main',
+            'netrps = netrps.trustless:main',
+        ],
+    },
 )
