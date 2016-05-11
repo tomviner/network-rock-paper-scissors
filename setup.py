@@ -23,7 +23,7 @@ setup(
     entry_points={
         'console_scripts': [
             'netrps = netrps.game:main',
-            'netrps = netrps.trustless:main',
+            'netrps_trustless = netrps.trustless:main',
         ],
     },
 )
