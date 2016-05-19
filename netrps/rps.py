@@ -4,6 +4,9 @@ from collections import deque
 from enum import IntEnum
 from functools import total_ordering
 
+from clint.textui import colored
+
+
 input_function = input
 
 class Result(IntEnum):
@@ -42,13 +45,19 @@ class RPS(object):
         return other.char == loses_to[1]
 
     def __repr__(self):
-        return self.keys[self.char]
+        name = self.keys[self.char]
+        colour = {
+            'r': colored.red,
+            'p': colored.yellow,
+            's': colored.blue,
+        }[self.char]
+        return str(colour(name))
 
 
-def get_local_move():
+def get_local_move(prompt='> '):
     while True:
         print('Enter [r]ock, [p]aper or [s]cissors')
-        move = input_function('> ').lower()
+        move = input_function(prompt).lower()
         if move in 'rps':
             return RPS(move)
 

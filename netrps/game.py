@@ -10,34 +10,39 @@ for player in game:
 decide winner
 """
 from __future__ import unicode_literals, print_function
-import sys
+import random
+
+import click
 
 import networkzero as nw0
-from netrps.rps import RPS, decide_winner
+from netrps.rps import RPS, decide_winner, get_local_move
 
 
-def play_first(my_move_char):
-    my_move = RPS(my_move_char)
+def play_first(choose_move):
+    # my_move = RPS(my_move_char)
 
     moves = []
     # discover
     my_address = nw0.discover('RPS')
+    if isinstance(choose_move, type('')):
+        my_move = RPS(choose_move)
+    else:
+        # we don't know their move yet!
+        my_move = choose_move(their_move=None)
     # send my move, and get their move back
     their_move = RPS(
-        nw0.send_message_to(my_address, my_move_char)
+        nw0.send_message_to(my_address, my_move.char)
     )
 
-    moves.append(their_move)
     moves.append(my_move)
+    moves.append(their_move)
 
     print('I play', my_move)
     print('They play', their_move)
     return decide_winner(moves)
 
 
-def play_second(my_move_char):
-    my_move = RPS(my_move_char)
-
+def play_second(choose_move):
     moves = []
     # advertise
     my_address = nw0.advertise("RPS")
@@ -46,28 +51,56 @@ def play_second(my_move_char):
         nw0.wait_for_message_from(my_address)
     )
     # reply with my move
-    nw0.send_reply_to(my_address, my_move_char)
+    if isinstance(choose_move, type('')):
+        my_move = RPS(choose_move)
+    else:
+        my_move = choose_move(their_move)
+    nw0.send_reply_to(my_address, my_move.char)
 
-    moves.append(my_move)
+    my_move = RPS(my_move.char)
     moves.append(their_move)
+    moves.append(my_move)
 
     print('I play', my_move)
     print('They play', their_move)
     return decide_winner(moves)
 
+class Strategies:
+    @staticmethod
+    def interactive(their_move):
+        move = get_local_move('Their move was {}. > '.format(their_move))
+        return RPS(move)
 
-def main():
-    args = sys.argv[1:]
-    if not args or len(args) != 2:
-        print('Usage: netrps <player num: 1/2> <move: r/p/s>')
-    else:
-        player_num, move_char = args
-        if player_num == '1':
-            print(play_second(move_char))
-        elif player_num == '2':
-            print(play_first(move_char))
-        else:
-            print("player num must be 1 or 2, not {!r}".format(player_num))
+    @staticmethod
+    def auto_cheat(their_move):
+        move = {'r': 'p', 'p': 's', 's': 'r'}[their_move.char]
+        return RPS(move)
 
-if __name__ == '__main__':
-    main()
+    @staticmethod
+    def random(their_move):
+        move = random.choice('rps')
+        return RPS(move)
+
+@click.command()
+@click.argument('move', type=click.Choice('rps'), required=False)
+@click.option('--random/--no-random', 'rnd')
+def player_one(move, rnd):
+    if rnd:
+        move = Strategies.random
+    print(play_first(move))
+
+@click.command()
+@click.argument('move', type=click.Choice('rps'), required=False)
+@click.option('--random/--no-random', 'rnd')
+@click.option('--interactive/--no-interactive')
+@click.option('--auto-cheat/--no-auto-cheat')
+def player_two(move, rnd, interactive, auto_cheat):
+    if rnd:
+        move = Strategies.random
+    elif interactive:
+        move = Strategies.interactive
+    elif auto_cheat:
+        move = Strategies.auto_cheat
+    elif not move:
+        move = Strategies.interactive
+    print(play_second(move))

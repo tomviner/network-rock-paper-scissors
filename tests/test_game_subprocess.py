@@ -4,8 +4,8 @@ from subprocess import PIPE, Popen
 
 
 def test_game(turn, reset_beacon):
-    proc1 = Popen(['netrps', '1', turn.p1_mv], stdout=PIPE)
-    proc2 = Popen(['netrps', '2', turn.p2_mv], stdout=PIPE)
+    proc1 = Popen(['player_one', turn.p1_mv], stdout=PIPE)
+    proc2 = Popen(['player_two', turn.p2_mv], stdout=PIPE)
 
     for proc in (proc1, proc2):
         output = str(proc.communicate()[0])

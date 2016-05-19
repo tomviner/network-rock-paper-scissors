@@ -16,14 +16,16 @@ setup(
     install_requires=[
         'enum34',
         'networkzero',
+        'clint',
+        'click',
     ],
     classifiers=[
         "License :: OSI Approved :: BSD License",
     ],
     entry_points={
         'console_scripts': [
-            'netrps = netrps.game:main',
-            'netrps_trustless = netrps.trustless:main',
+            'player_one = netrps.game:player_one',
+            'player_two = netrps.game:player_two',
         ],
     },
 )
