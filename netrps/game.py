@@ -19,8 +19,6 @@ from netrps.rps import RPS, decide_winner, get_local_move
 
 
 def play_first(choose_move):
-    # my_move = RPS(my_move_char)
-
     moves = []
     # discover
     my_address = nw0.discover('RPS')
@@ -85,6 +83,12 @@ class Strategies:
 @click.argument('move', type=click.Choice('rps'), required=False)
 @click.option('--random/--no-random', 'rnd')
 def player_one(move, rnd):
+    """Usage: player_one [OPTIONS] [MOVE]
+
+    Options:
+      --random / --no-random
+      --help                  Show this message and exit.
+    """
     if rnd:
         move = Strategies.random
     print(play_first(move))
@@ -95,6 +99,14 @@ def player_one(move, rnd):
 @click.option('--interactive/--no-interactive')
 @click.option('--auto-cheat/--no-auto-cheat')
 def player_two(move, rnd, interactive, auto_cheat):
+    """Usage: player_two [OPTIONS] [MOVE]
+
+    Options:
+      --random / --no-random
+      --interactive / --no-interactive
+      --auto-cheat / --no-auto-cheat
+      --help                          Show this message and exit.
+    """
     if rnd:
         move = Strategies.random
     elif interactive:
