@@ -18,6 +18,7 @@ setup(
         'networkzero',
         'clint',
         'click',
+        'six',
     ],
     classifiers=[
         "License :: OSI Approved :: BSD License",

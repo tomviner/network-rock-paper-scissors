@@ -13,6 +13,7 @@ from __future__ import unicode_literals, print_function
 import random
 
 import click
+import six
 
 import networkzero as nw0
 from netrps.rps import RPS, decide_winner, get_local_move
@@ -22,7 +23,7 @@ def play_first(choose_move):
     moves = []
     # discover
     my_address = nw0.discover('RPS')
-    if isinstance(choose_move, type('')):
+    if isinstance(choose_move, six.string_types):
         my_move = RPS(choose_move)
     else:
         # we don't know their move yet!
