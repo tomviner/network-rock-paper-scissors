@@ -47,9 +47,9 @@ class RPS(object):
     def __repr__(self):
         name = self.keys[self.char]
         colour = {
-            'r': colored.red,
+            'r': colored.green,
             'p': colored.yellow,
-            's': colored.blue,
+            's': colored.cyan,
         }[self.char]
         return str(colour(name))
 

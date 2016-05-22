@@ -27,6 +27,9 @@ setup(
         'console_scripts': [
             'player_one = netrps.game:player_one',
             'player_two = netrps.game:player_two',
+
+            'tl_player_one = netrps.trustless:player_one',
+            'tl_player_two = netrps.trustless:player_two',
         ],
     },
 )
