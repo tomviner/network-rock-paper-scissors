@@ -43,9 +43,6 @@ import networkzero as nw0
 from netrps.rps import RPS, decide_winner, get_local_move
 
 
-class CheatDetected(Exception):
-    pass
-
 def make_salt():
     return random.randint(0, 999)
 
@@ -160,7 +157,7 @@ class Strategies:
     @staticmethod
     def interactive(their_move):
         move = get_local_move('Their move was {}. > '.format(their_move))
-        return RPS(move)
+        return move
 
     @staticmethod
     def auto_cheat(their_move):

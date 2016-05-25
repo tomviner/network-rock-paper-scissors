@@ -68,7 +68,7 @@ class Strategies:
     @staticmethod
     def interactive(their_move):
         move = get_local_move('Their move was {}. > '.format(their_move))
-        return RPS(move)
+        return move
 
     @staticmethod
     def auto_cheat(their_move):
